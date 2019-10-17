@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from .models import User, Entry, Image
 from .serializer import UserSerializer, EntrySerializer, ImageSerializer
 from django.conf import settings
+from .utils import *
+
 UPLOAD_DIR = 'static/uploaded/'
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -43,5 +45,7 @@ class ImageViewSet(viewsets.ModelViewSet):
             image.created_at = request.POST['created_at']
             image.updated_at = request.POST['updated_at']
             image.save()
-
+        doRinkaku(file.name)
         return Response({'message': 'OK'})
+        
+ 
